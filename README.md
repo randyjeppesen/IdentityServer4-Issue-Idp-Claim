@@ -6,6 +6,15 @@ If you want to change the idp or amr claim values in IdentityServer4, follow the
 
 1.  Add a Claims Principal Factory
 
+`using AB.EntityFramework.Entities.Identity;
+using IdentityModel;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
+using System.Security.Claims;
+using System.Threading.Tasks;
+
+namespace AB.IdentityServer
+{
     public class CustomClaimsPrincipalFactory : UserClaimsPrincipalFactory<UserIdentity, UserIdentityRole>
     {
         public CustomClaimsPrincipalFactory(UserManager<UserIdentity> userManager, RoleManager<UserIdentityRole> roleManager,
@@ -19,13 +28,15 @@ If you want to change the idp or amr claim values in IdentityServer4, follow the
             var principal = await base.CreateAsync(user);
 
             // Add your claims here
-            ((ClaimsIdentity)principal.Identity).AddClaims(new[] { new Claim(JwtClaimTypes.IdentityProvider, "yourprovidernamehere"),
+            ((ClaimsIdentity)principal.Identity).AddClaims(new[] { new Claim(JwtClaimTypes.IdentityProvider, "accessbenefits"),
                                                                    new Claim(JwtClaimTypes.AuthenticationMethod, "password")
                                                                  });
 
             return principal;
         }
     }
+}
+`
 
 2.  In Startup.ConfigureServices, add Claims processor after services.AddIdentity:
 
