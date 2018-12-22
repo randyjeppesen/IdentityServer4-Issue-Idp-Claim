@@ -29,9 +29,10 @@ namespace AB.IdentityServer
             var principal = await base.CreateAsync(user);
 
             // Add your claims here
-            ((ClaimsIdentity)principal.Identity).AddClaims(new[] { new Claim(JwtClaimTypes.IdentityProvider, "accessbenefits"),
-                                                                   new Claim(JwtClaimTypes.AuthenticationMethod, "password")
-                                                                 });
+            ((ClaimsIdentity)principal.Identity).AddClaims(new[] 
+                    { new Claim(JwtClaimTypes.IdentityProvider, "yourProviderNameHere"),
+                      new Claim(JwtClaimTypes.AuthenticationMethod, "passwordOrWhateverYouWant")
+                    });
 
             return principal;
         }
@@ -40,8 +41,9 @@ namespace AB.IdentityServer
 ```
 
 2.  In Startup.ConfigureServices, add Claims processor after services.AddIdentity:
-
-            // Add Custom Claims processor
-            services.AddScoped<IUserClaimsPrincipalFactory<UserIdentity>, CustomClaimsPrincipalFactory>();
+```
+// Add Custom Claims processor
+services.AddScoped<IUserClaimsPrincipalFactory<UserIdentity>, CustomClaimsPrincipalFactory>();
+```
             
 That's it.  Super simple!            
