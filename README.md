@@ -1,6 +1,6 @@
 # IdentityServer4 Issue Idp Claim (Change from "local")
 
-This took me a bit to figure out.  I'm posting the solution because I could not find a good example when I was searching.  Turns out that identityserver looks for Idp and amr in the Claims Principle and if it does not find them, it assigns "local" to Idp and "pwd" to amr.  Those claim types need to be added before sign-in... so you have to override the CreateAsync method and add them manually.
+This took me a bit to figure out.  I'm posting the solution because I could not find a good example when I was searching.  Turns out that identityserver looks for Idp and amr in the Identity Principal and if it does not find them, it assigns "local" to Idp and "pwd" to Amr.  Those claim types need to be added before signin... so you have to override the CreateAsync method and add them manually.
 
 If you want to change the idp or amr claim values in IdentityServer4, follow these steps:
 
