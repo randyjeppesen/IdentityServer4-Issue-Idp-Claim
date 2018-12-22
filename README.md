@@ -6,7 +6,8 @@ If you want to change the idp or amr claim values in IdentityServer4, follow the
 
 1.  Add a Claims Principal Factory
 
-`using AB.EntityFramework.Entities.Identity;
+```
+using AB.EntityFramework.Entities.Identity;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -36,7 +37,7 @@ namespace AB.IdentityServer
         }
     }
 }
-`
+```
 
 2.  In Startup.ConfigureServices, add Claims processor after services.AddIdentity:
 
